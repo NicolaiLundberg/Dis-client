@@ -8,8 +8,10 @@ $(document).ready(() => {
 
     });
 
-    $("#createuser-button").click(() => {
+    $("#createEvent-button").click(() => {
 
-        window.location.href = "create-user.html";
+        window.location.href = "create-event.html";
     });
+
+
 });
