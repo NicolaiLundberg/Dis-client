@@ -1,10 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>createuser</title>
+
 </head>
 <body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 align="CENTER">Opret ny bruger</h1>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label class="control-label" for="inputFirstName">Indtast fornavn</label>
+                    <input type="firstName" class="form-control" id="inputFirstName" placeholder="FistName">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="inputLastName">Indtast efternavn</label>
+                    <input type="lastName" class="form-control" id="inputLastName" placeholder="LastName">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="inputPassword">Indtast kodeord</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="inputEmail">Indtast email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Køn</label>
+                    <form>
+                        <input type="radio" name="gender" value="male" checked> Mand<br>
+                        <input type="radio" name="gender" value="female"> Kvinde<br>
+                    </form>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="inputMajor">Indtast studieretning</label>
+                    <input type="major" class="form-control" id="inputMajor" placeholder="Major">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Semester</label>
+                    <form>
+                        <input type="radio" name="semester" value="1" checked> 1. Semester<br>
+                        <input type="radio" name="semester" value="2"> 2. Semester<br>
+                        <input type="radio" name="semester" value="3"> 3. Semester<br>
+                        <input type="radio" name="semester" value="4"> 4. Semester<br>
+                        <input type="radio" name="semester" value="5"> 5. Semester<br>
+                        <input type="radio" name="semester" value="6"> 6. Semester<br>
+                    </form>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="inputDescription">Kort beskrivelse</label>
+                    <textarea rows="4" cols="50" id="inputDescription"></textarea>
+                </div>
+
+                <button style="..." class="btn btn-default" id="createuser-button">Opret bruger</button>
+                <button style="..." class="btn btn-default" id="return-button">Tilbage</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" align="CENTER">2016 © All rights reserved - Team ROFL/Cafe Nexus.</p>
+    </div>
+</footer>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/create-user.js"></script>
 
 </body>
 </html>

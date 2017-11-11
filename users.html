@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
+
+<div class="container">
+    <div class="row" id="nav-container"></div>
+
+    <div class="row">
+        <div class="co-lg-12">
+            <div class="page-header">
+                <h1 align="CENTER">Brugere</h1>
+            </div>
+
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Efternavn</th>
+                        <th>Fornavn</th>
+                        <th>Email</th>
+                        <th>Køn</th>
+                        <th>Studieretning</th>
+                        <th>Semester</th>
+                        <th>Beskrivelse</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" align="CENTER">2016 © All rights reserved - Team ROFL/Cafe Nexus.</p>
+    </div>
+</footer>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script>
+    SDK.User.loadNav();
+</script>
 
 </body>
 </html>

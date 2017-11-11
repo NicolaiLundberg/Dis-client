@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
     <meta charset="UTF-8">
     <title>Title</title>
+
+
 </head>
 <body>
+
+<!-- Modal -->
+<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Information om dette event</h4>
+            </div>
+
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <p>Her vil blive vist information om det enkelte event!</p>
+                    </tr>
+                    </thead>
+                    <tbody id="modal-tbody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Luk</button>
+                <a href="comments.html">
+                    <button type="button" class="btn btn-success">Vis kommentarer</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row" id="nav-container"></div>
+
+    <div class="page-header">
+        <h1 align="CENTER">Events</h1>
+    </div>
+
+    <div class="row" id="event-list">
+        <p>Her vil events blive vist!</p>
+
+        <button type="button" class="btn btn-default" id="showEvent-button">Vis kommentarer</button>
+    </div>
+</div>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/events.js"></script>
+<script>
+    SDK.User.loadNav();
+</script>
+
 
 </body>
 </html>
