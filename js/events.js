@@ -9,7 +9,6 @@ $(document).ready(() => {
     });
 
     $("#createEvent-button").click(() => {
-
         window.location.href = "create-event.html";
     });
 

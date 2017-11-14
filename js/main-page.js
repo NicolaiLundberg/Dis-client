@@ -4,20 +4,19 @@ $(document).ready(() => {
 
     $("#login-button").click(() => {
 
-        window.alert("Hejsa");
-        window.location.href = "home-page.html"
-
         const email = $("#inputEmail").val();
         const password = $("#inputPassword").val();
 
-        SDK.User.login(email, password, (err, data) => {
+        SDK.User.login(password, email, (err, data) => {
             if (err && err.xhr.status === 401) {
+
                 $(".form-group").addClass("has-error");
             }
             else if (err) {
+                console.log(err, data);
                 console.log("BAd stuff happened")
             } else {
-                window.location.href = "my-page.html";
+                window.location.href = "home-page.html";
             }
         });
 
