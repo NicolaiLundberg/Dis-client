@@ -15,10 +15,14 @@ $(document).ready(() => {
             else if (err) {
                 console.log(err, data);
                 console.log("BAd stuff happened")
-            } else {
+            }
+            else {
                 window.location.href = "home-page.html";
+
             }
         });
+
+
 
     });
 

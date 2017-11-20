@@ -27,9 +27,46 @@ const SDK = {
 
     },
 
+    Event: {
+        createEvent: (owner_id, title, startDate, endDate, description, cb) => {
+            SDK.request({
+                data: {
+                    owner_id: owner_id,
+                    title: title,
+                    startDate: startDate,
+                    endDate: endDate,
+                    description: description
+                },
+                url: "/events",
+                method: "POST"
+            }, cb)
+        },
+        findAllEvents: (cb) => {
+            SDK.request({
 
+                method: "GET",
+                url: "/events"
+            }, cb)
+        },
+    },
+
+    Post: {},
     User: {
 
+        myInfo: (cb) =>{
+          SDK.request({
+              method: "GET",
+              url: "/users"
+
+
+          },
+              (err, data) =>{
+
+                  SDK.Storage.persist("token", data);
+
+              },
+              cb)
+        },
         createUser: (password, firstName, lastName, email, description, gender, major, semester, cb) => {
             SDK.request({
                 data: {
@@ -51,8 +88,8 @@ const SDK = {
             SDK.request({
                     method: "GET",
                     url: "/users"
-                },
 
+                },
                 cb);
         },
         current: () => {
@@ -71,16 +108,17 @@ const SDK = {
                 },
                 url: "/auth",
                 method: "POST"
-            }, (err, data) => {
-                if (err) return cb(err, data);
-                debugger;
-                SDK.Storage.persist("token", data);
+            }, (err, data, header) => {
+                if (err) return cb(err);
 
+                SDK.Storage.persist("token", data);
 
                 cb(null, data);
 
-            });
+            }, cb);
         },
+
+
         loadNav: (cb) => {
             $("#nav-container").load("nav.html", () => {
                 const currentUser = SDK.User.current();
@@ -109,4 +147,4 @@ const SDK = {
             window.localStorage.removeItem(SDK.Storage.prefix + key);
         }
     }
-}
+};
