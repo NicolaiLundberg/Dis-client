@@ -1,12 +1,10 @@
 $(document).ready(() => {
 
 
-
-SDK.User.myInfo();
     SDK.User.loadNav();
     const $eventList = $("#event-list");
 
-    SDK.Event.findAllEvents((err, events) =>{
+    SDK.Event.findAllEvents((err, events) => {
 
         events.forEach((event) => {
             const eventHtml = `
@@ -15,9 +13,12 @@ SDK.User.myInfo();
                 <div class="panel-heading">
                     <h3 class="panel-title">${event.title}</h3>
                 </div>
+                
                 <div class="panel-body">
                     <div class="col-lg-8">
                       <dl>
+                      <dt>Oprettet</dt>
+                      <dd>${event.created}</dd>
                         <dt>Startdato</dt>
                         <dd>${event.startDate}</dd>
                         <dt>Slutdato</dt>
@@ -27,19 +28,26 @@ SDK.User.myInfo();
                       </dl>
                     </div>
                 </div>
+                
                 <div class="panel-footer">
                     <div class="row">
-                        <div class="col-lg-8 text-right">
-                            <button class="btn btn-default">Flere detaljer</button>
-                        </div>
+                            <button class="btn btn-default this-button" data-event-id="${event.id}">Flere detaljer</button>
                     </div>
                 </div>
             </div>
+            
         </div>`;
 
             $eventList.append(eventHtml);
-    });
+        });
 
+        $(".this-button").click(function(){
+            const eventId = $(this).data("event-id");
+            const event = events.find((event) => event.id === eventId);
+
+            window.alert(eventId);
+        });
+    });
     $("#showEvent-button").click(() => {
 
         $("#event-modal").modal("toggle");
@@ -52,5 +60,4 @@ SDK.User.myInfo();
 
 
 
-});
 });

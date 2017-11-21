@@ -38,7 +38,7 @@ const SDK = {
                     description: description
                 },
                 url: "/events",
-                method: "POST"
+                method: "POST",
             }, cb)
         },
         findAllEvents: (cb) => {
@@ -93,11 +93,10 @@ const SDK = {
                 cb);
         },
         current: () => {
-            return SDK.Storage.load("user");
+            return SDK.Storage.load("userId");
         },
         logOut: () => {
             SDK.Storage.remove("token");
-            window.alert("lol")
             window.location.href = "main-page.html";
         },
         login: (password, email, cb) => {
@@ -108,10 +107,19 @@ const SDK = {
                 },
                 url: "/auth",
                 method: "POST"
-            }, (err, data, header) => {
+            }, (err, data) => {
                 if (err) return cb(err);
 
+                // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
+                let token = data;
+
+                    var base64Url = token.split('.')[0];
+                    var base64 = base64Url.replace('-', '+').replace('_', '/');
+                console.log(JSON.parse(window.atob(base64)));
+
+                SDK.Storage.persist("userId", JSON.parse(window.atob(base64)).kid);
                 SDK.Storage.persist("token", data);
+
 
                 cb(null, data);
 

@@ -8,9 +8,9 @@ $(document).ready(() => {
         const startDate = $("#inputStartDate").val();
         const endDate = $("#inputEndDate").val();
         const description = $("#inputEventDescription").val();
-        const owner_id = 3;
+        const owner_id = SDK.User.current();
 
-        SDK.Event.createEvent(owner_id, title, startDate, endDate, description, (err) => {
+        SDK.Event.createEvent( owner_id, title, startDate, endDate, description, (err) => {
 
 
 
