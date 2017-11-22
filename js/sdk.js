@@ -39,34 +39,40 @@ const SDK = {
                 },
                 url: "/events",
                 method: "POST",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
             }, cb)
         },
         findAllEvents: (cb) => {
             SDK.request({
 
                 method: "GET",
-                url: "/events"
+                url: "/events",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
             }, cb)
         },
     },
 
-    Post: {},
+    Post: {
+        findall: (cb) =>{
+            SDK.request({
+                method: "GET",
+                url: "/posts",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+
+            }, cb)
+
+        },
+
+    },
     User: {
 
-        myInfo: (cb) =>{
-          SDK.request({
-              method: "GET",
-              url: "/users"
 
-
-          },
-              (err, data) =>{
-
-                  SDK.Storage.persist("token", data);
-
-              },
-              cb)
-        },
         createUser: (password, firstName, lastName, email, description, gender, major, semester, cb) => {
             SDK.request({
                 data: {
@@ -97,6 +103,7 @@ const SDK = {
         },
         logOut: () => {
             SDK.Storage.remove("token");
+            SDK.Storage.remove("userId");
             window.location.href = "main-page.html";
         },
         login: (password, email, cb) => {

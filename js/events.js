@@ -41,13 +41,31 @@ $(document).ready(() => {
             $eventList.append(eventHtml);
         });
 
-        $(".this-button").click(function(){
+        $(".this-button").click(function () {
             const eventId = $(this).data("event-id");
             const event = events.find((event) => event.id === eventId);
 
-            window.alert(eventId);
+
+            SDK.Post.findall((err, posts) => {
+
+console.log(posts);
+                posts.forEach((post) => {
+
+
+                    if (eventId === post.event.id) {
+                        window.alert(post.event.id + "" + post.id + "" + post.owner.id + "" + post.content);
+
+                } else {
+
+                }
+                });
+            });
+
+
         });
     });
+
+
     $("#showEvent-button").click(() => {
 
         $("#event-modal").modal("toggle");
@@ -57,7 +75,6 @@ $(document).ready(() => {
     $("#createEvent-button").click(() => {
         window.location.href = "create-event.html";
     });
-
 
 
 });
