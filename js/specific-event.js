@@ -83,6 +83,14 @@ $(document).ready(() => {
 
     });
 
+    $("#return-button").click(function () {
+
+
+        window.location.href = "events.html";
+
+
+    });
+
     $("#comment-modal").on("shown.bs.modal", () => {
 
         SDK.Post.findComments((err, post) => {
@@ -112,14 +120,21 @@ $(document).ready(() => {
         $("#modal-tbody").html("");
     });
 
+$("#newComment-button").click(function () {
 
-    $("#return-button").click(function () {
+    const ownerId = SDK.Storage.load("userId");
+    const content = $("#inputNewComment").val();
+    const parentId = SDK.Storage.load("chosenPostId");
 
-
-        window.location.href = "events.html";
+    SDK.Post.createComment(ownerId, content, parentId, (err, data) => {
 
 
     });
+    
+    $("#comment-modal").modal("toggle");
+
+});
+
 
 
 });

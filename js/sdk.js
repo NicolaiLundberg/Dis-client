@@ -102,6 +102,21 @@ const SDK = {
 
         },
 
+        createComment: (ownerId, content, parentId, cb) => {
+            SDK.request({
+                data: {
+                    owner: ownerId,
+                    content: content ,
+                    parent: parentId,
+                },
+                url: "/posts",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+            }, cb)
+        },
+
     },
 
     User: {
