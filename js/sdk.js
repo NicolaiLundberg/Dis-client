@@ -44,6 +44,8 @@ const SDK = {
                 }
             }, cb)
         },
+
+
         findAllEvents: (cb) => {
             SDK.request({
 
@@ -51,16 +53,31 @@ const SDK = {
                 url: "/events",
                 headers: {
                     Authorization: "Bearer " + SDK.Storage.load("token")
-                }
+                },
             }, cb)
+        },
+
+        findEvent: (cb) => {
+            SDK .request({
+                method: "GET",
+                url: "/events/" + SDK.Storage.load("chosenEventId"),
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                },
+
+            }, cb)
+
+
         },
     },
 
     Post: {
-        findall: (cb) =>{
+
+
+        findComments: (cb) => {
             SDK.request({
                 method: "GET",
-                url: "/posts",
+                url: "/posts/" + SDK.Storage.load("chosenPostId"),
                 headers: {
                     Authorization: "Bearer " + SDK.Storage.load("token")
                 }
@@ -69,9 +86,25 @@ const SDK = {
 
         },
 
-    },
-    User: {
+        createPost: (ownerId, content, eventId, cb) => {
+            SDK.request({
+                data: {
+                    owner: ownerId,
+                    content: content ,
+                    event: eventId,
+                },
+                url: "/posts",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+            }, cb)
 
+        },
+
+    },
+
+    User: {
 
         createUser: (password, firstName, lastName, email, description, gender, major, semester, cb) => {
             SDK.request({
@@ -93,10 +126,26 @@ const SDK = {
         findAll: (cb) => {
             SDK.request({
                     method: "GET",
-                    url: "/users"
+                    url: "/users",
+                    headers: {
+                        Authorization: "Bearer " + SDK.Storage.load("token")
+                    }
 
                 },
                 cb);
+        },
+
+        findUser: (cb) => {
+            SDK.request({
+                    method: "GET",
+                    url: "/users/" + SDK.Storage.load("postOwnerId"),
+                    headers: {
+                        Authorization: "Bearer " + SDK.Storage.load("token")
+                    }
+
+                },
+                cb);
+
         },
         current: () => {
             return SDK.Storage.load("userId");
@@ -113,15 +162,18 @@ const SDK = {
                     email: email
                 },
                 url: "/auth",
-                method: "POST"
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
             }, (err, data) => {
                 if (err) return cb(err);
 
                 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
                 let token = data;
 
-                    var base64Url = token.split('.')[0];
-                    var base64 = base64Url.replace('-', '+').replace('_', '/');
+                var base64Url = token.split('.')[0];
+                var base64 = base64Url.replace('-', '+').replace('_', '/');
                 console.log(JSON.parse(window.atob(base64)));
 
                 SDK.Storage.persist("userId", JSON.parse(window.atob(base64)).kid);
@@ -143,6 +195,7 @@ const SDK = {
             });
         }
     },
+
     Storage: {
         prefix: "CafeNexusSDK",
         persist: (key, value) => {

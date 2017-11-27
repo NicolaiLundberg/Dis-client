@@ -4,12 +4,14 @@ $(document).ready(() => {
     SDK.User.loadNav();
     const $eventList = $("#event-list");
 
+
     SDK.Event.findAllEvents((err, events) => {
 
         events.forEach((event) => {
             const eventHtml = `
         <div class="col-lg-4 book-container">
             <div class="panel panel-default">
+            
                 <div class="panel-heading">
                     <h3 class="panel-title">${event.title}</h3>
                 </div>
@@ -41,34 +43,23 @@ $(document).ready(() => {
             $eventList.append(eventHtml);
         });
 
+
         $(".this-button").click(function () {
+
             const eventId = $(this).data("event-id");
+            const ownerId = $(this).data(events.owner);
             const event = events.find((event) => event.id === eventId);
 
-
-            SDK.Post.findall((err, posts) => {
-
-console.log(posts);
-                posts.forEach((post) => {
+            SDK.Storage.persist("chosenEventId", eventId);
 
 
-                    if (eventId === post.event.id) {
-                        window.alert(post.event.id + "" + post.id + "" + post.owner.id + "" + post.content);
-
-                } else {
-
-                }
-                });
-            });
-
+            window.location.href = "specific-event.html";
 
         });
     });
 
-
     $("#showEvent-button").click(() => {
 
-        $("#event-modal").modal("toggle");
 
     });
 
