@@ -1,4 +1,8 @@
+
+//creating a constant of SDK, so it will be possible to call methods from other .js pages.
 const SDK = {
+
+    //initializing the serURL to connect with the server.
     serverURL: "http://localhost:8080/api",
     request: (options, cb) => {
 
@@ -27,6 +31,8 @@ const SDK = {
 
     },
 
+
+    // All the server calls regarding the events. createEvent, findAllEvents, findEvent.
     Event: {
         createEvent: (owner_id, title, startDate, endDate, description, cb) => {
             SDK.request({
@@ -58,7 +64,7 @@ const SDK = {
         },
 
         findEvent: (cb) => {
-            SDK .request({
+            SDK.request({
                 method: "GET",
                 url: "/events/" + SDK.Storage.load("chosenEventId"),
                 headers: {
@@ -90,7 +96,7 @@ const SDK = {
             SDK.request({
                 data: {
                     owner: ownerId,
-                    content: content ,
+                    content: content,
                     event: eventId,
                 },
                 url: "/posts",
@@ -106,7 +112,7 @@ const SDK = {
             SDK.request({
                 data: {
                     owner: ownerId,
-                    content: content ,
+                    content: content,
                     parent: parentId,
                 },
                 url: "/posts",
@@ -135,13 +141,20 @@ const SDK = {
                 },
                 url: "/users",
                 method: "POST"
-            }, cb)
+            }, (err, data) => {
+
+            if (err) return cb(err);
+
+                cb(null, data);
+
+            }, cb);
         },
 
         findAll: (cb) => {
             SDK.request({
+
                     method: "GET",
-                    url: "/users",
+                    url: "/users/",
                     headers: {
                         Authorization: "Bearer " + SDK.Storage.load("token")
                     }
