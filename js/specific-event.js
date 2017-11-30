@@ -84,19 +84,29 @@ $(document).ready(() => {
 
     $("#comment-modal").on("shown.bs.modal", () => {
 
+
         SDK.Post.findComments((err, post) => {
-            const postComments = post.comments;
 
-            postComments.forEach((post) => {
 
+
+
+            console.log(post.owner.id);
+
+            post.comments.forEach((post) => {
+
+               SDK.Storage.persist("postOwnerId", post.owner.id);
+
+                SDK.User.findUser((err, user) => {
                 const $modalTbody = $("#modal-tbody");
 
                 $modalTbody.append(`
                  <dl>
-                      <dt>${post.owner.id}</dt><dd>${post.content}</dd>     
+                      <dt>${user}</dt><dd>${post.content}</dd>     
                  </dl>
                  `);
             });
+
+        });
         });
     });
 
