@@ -1,4 +1,3 @@
-
 //creating a constant of SDK, so it will be possible to call methods from other .js pages.
 const SDK = {
 
@@ -51,7 +50,6 @@ const SDK = {
             }, cb)
         },
 
-
         findAllEvents: (cb) => {
             SDK.request({
 
@@ -72,25 +70,11 @@ const SDK = {
                 },
 
             }, cb)
-
-
         },
     },
 
+    //All the server calls regarding posts and comments. createPost, createComment, findComments.
     Post: {
-
-
-        findComments: (cb) => {
-            SDK.request({
-                method: "GET",
-                url: "/posts/" + SDK.Storage.load("chosenPostId"),
-                headers: {
-                    Authorization: "Bearer " + SDK.Storage.load("token")
-                }
-
-            }, cb)
-
-        },
 
         createPost: (ownerId, content, eventId, cb) => {
             SDK.request({
@@ -105,7 +89,6 @@ const SDK = {
                     Authorization: "Bearer " + SDK.Storage.load("token")
                 }
             }, cb)
-
         },
 
         createComment: (ownerId, content, parentId, cb) => {
@@ -123,8 +106,18 @@ const SDK = {
             }, cb)
         },
 
+        findComments: (cb) => {
+            SDK.request({
+                method: "GET",
+                url: "/posts/" + SDK.Storage.load("chosenPostId"),
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+            }, cb)
+        },
     },
 
+    //All server calls regarding users. createUser, findAll, findUser, current, logout, login, loadNav.
     User: {
 
         createUser: (password, firstName, lastName, email, description, gender, major, semester, cb) => {
@@ -142,23 +135,18 @@ const SDK = {
                 url: "/users",
                 method: "POST"
             }, (err, data) => {
-
-            if (err) return cb(err);
-
+                if (err) return cb(err);
                 cb(null, data);
-
             }, cb);
         },
 
         findAll: (cb) => {
             SDK.request({
-
                     method: "GET",
                     url: "/users/",
                     headers: {
                         Authorization: "Bearer " + SDK.Storage.load("token")
                     }
-
                 },
                 cb);
         },
@@ -175,14 +163,17 @@ const SDK = {
                 cb);
 
         },
+
         current: () => {
             return SDK.Storage.load("userId");
         },
+
         logOut: () => {
             SDK.Storage.remove("token");
             SDK.Storage.remove("userId");
             window.location.href = "main-page.html";
         },
+
         login: (password, email, cb) => {
             SDK.request({
                 data: {
@@ -207,12 +198,9 @@ const SDK = {
                 SDK.Storage.persist("userId", JSON.parse(window.atob(base64)).kid);
                 SDK.Storage.persist("token", data);
 
-
                 cb(null, data);
-
             }, cb);
         },
-
 
         loadNav: (cb) => {
             $("#nav-container").load("nav.html", () => {
@@ -224,6 +212,7 @@ const SDK = {
         }
     },
 
+    //These methods is used for localstorage. To store things that are used later.
     Storage: {
         prefix: "CafeNexusSDK",
         persist: (key, value) => {
@@ -241,6 +230,6 @@ const SDK = {
         },
         remove: (key) => {
             window.localStorage.removeItem(SDK.Storage.prefix + key);
-        }
-    }
+        },
+    },
 };

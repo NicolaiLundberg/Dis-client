@@ -1,12 +1,14 @@
 $(document).ready(() => {
 
-
+    //Loading the navigationbar.
     SDK.User.loadNav();
+
+    //Creating a constant for the userlist in the users.html page.
     const $userlist = $("#user-list");
 
+    //This is the server call to get alle users in the database.
     SDK.User.findAll((err, users) => {
         users.forEach((user) => {
-
 
             $userlist.append(`
 <div class="row">
@@ -28,7 +30,5 @@ $(document).ready(() => {
                 `
             );
         });
-
     });
-
 });
