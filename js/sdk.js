@@ -46,7 +46,10 @@ const SDK = {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + SDK.Storage.load("token")
-                }
+                },
+            }, (err, data) => {
+                    if (err) return cb(err);
+                    cb(null, data);
             }, cb)
         },
 
@@ -171,6 +174,9 @@ const SDK = {
         logOut: () => {
             SDK.Storage.remove("token");
             SDK.Storage.remove("userId");
+            SDK.Storage.remove("chosenEventId");
+            SDK.Storage.remove("chosenPostId");
+            SDK.Storage.remove("postOwnerId");
             window.location.href = "main-page.html";
         },
 

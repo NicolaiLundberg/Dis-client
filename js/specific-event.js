@@ -21,14 +21,11 @@ $(document).ready(() => {
 
             SDK.User.findUser((err, user) => {
 
-                console.log(eventPost.owner.id);
-
                 $PostList.append(postsHtml = `
 
                     <div class="col-lg-12 post-container" >
                         <div class="panel panel-default">
                             <div class="panel-heading" align="CENTER">
-                            <h3 class="panel-title">${eventPost.id}</h3>
                                 <h3 class="panel-title">${user}</h3>
                             </div>
                             
@@ -87,11 +84,6 @@ $(document).ready(() => {
 
         SDK.Post.findComments((err, post) => {
 
-
-
-
-            console.log(post.owner.id);
-
             post.comments.forEach((post) => {
 
                SDK.Storage.persist("postOwnerId", post.owner.id);
@@ -101,7 +93,8 @@ $(document).ready(() => {
 
                 $modalTbody.append(`
                  <dl>
-                      <dt>${user}</dt><dd>${post.content}</dd>     
+                      <dt>${user}</dt>
+                      <dd>${post.content}</dd>     
                  </dl>
                  `);
             });
@@ -125,5 +118,6 @@ $(document).ready(() => {
         SDK.Post.createComment(ownerId, content, parentId, (err, data) => {
         });
         $("#comment-modal").modal("toggle");
+
     });
 });

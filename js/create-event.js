@@ -3,7 +3,6 @@ $(document).ready(() => {
     //loading the navigationbar.
     SDK.User.loadNav();
 
-
     // The code which is fired if the create event button is pressed on.
     $("#createEvent-button").click(() => {
 
@@ -17,8 +16,16 @@ $(document).ready(() => {
         //The create event call to the server, which sends the input from the user. If the event is created the event will be stored in the database.
         SDK.Event.createEvent(owner_id, title, startDate, endDate, description, (err) => {
 
+            if (err && err.xhr.status === 400) {
+                window.alert("Fejl! tjek indtastede værdier");
+            }
+            else if (err) {
+                console.log("Oups");
+            }
+            else {
+                window.location.href = "events.html";
+            }
         });
-        window.alert("Event Oprettet!");
     });
 
     // This is the code which is fired if the return button is pressed on. The user will be returned to events page.
