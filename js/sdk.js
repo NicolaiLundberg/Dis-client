@@ -1,8 +1,9 @@
 //creating a constant of SDK, so it will be possible to call methods from other .js pages.
 const SDK = {
 
-    //initializing the serURL to connect with the server.
-    serverURL: "http://localhost:8080/api",
+    //initializing the serverURL to connect with the server.
+    //Reference: line 6 - 31, this code is taken from DISbook project handed out by the exerciseteacher Jesper.
+    serverURL: "https://localhost:8443/api",
     request: (options, cb) => {
 
         let headers = {};
@@ -27,11 +28,10 @@ const SDK = {
                 cb({xhr: xhr, status: status, error: errorThrown});
             }
         });
-
     },
 
 
-    // All the server calls regarding the events. createEvent, findAllEvents, findEvent.
+    // All the server calls regarding the events: createEvent, findAllEvents, findEvent.
     Event: {
         createEvent: (owner_id, title, startDate, endDate, description, cb) => {
             SDK.request({
@@ -42,8 +42,11 @@ const SDK = {
                     endDate: endDate,
                     description: description
                 },
+                // url to reach the  userEndpoint on the server.
                 url: "/events",
+                // POST method because the user creates a new event.
                 method: "POST",
+                //The header which sends Bearer + token to get access to create a new event. without this the user wont be able to create a event
                 headers: {
                     Authorization: "Bearer " + SDK.Storage.load("token")
                 },
@@ -76,7 +79,7 @@ const SDK = {
         },
     },
 
-    //All the server calls regarding posts and comments. createPost, createComment, findComments.
+    //All the server calls regarding posts and comments: createPost, createComment, findComments.
     Post: {
 
         createPost: (ownerId, content, eventId, cb) => {
@@ -120,7 +123,7 @@ const SDK = {
         },
     },
 
-    //All server calls regarding users. createUser, findAll, findUser, current, logout, login, loadNav.
+    //All server calls regarding users: createUser, findAll, findUser, current, logout, login, loadNav.
     User: {
 
         createUser: (password, firstName, lastName, email, description, gender, major, semester, cb) => {
@@ -171,6 +174,7 @@ const SDK = {
             return SDK.Storage.load("userId");
         },
 
+        // Logout function which removes all from the localstorage and returns the user to the main page.
         logOut: () => {
             SDK.Storage.remove("token");
             SDK.Storage.remove("userId");
@@ -194,7 +198,7 @@ const SDK = {
             }, (err, data) => {
                 if (err) return cb(err);
 
-                // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
+                // Reference: line 199 - 203 https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
                 let token = data;
 
                 var base64Url = token.split('.')[0];
@@ -208,6 +212,7 @@ const SDK = {
             }, cb);
         },
 
+        // Reference: line 215 - 222 this code is taken from DISbook handed out by exerciseteacher Jesper.
         loadNav: (cb) => {
             $("#nav-container").load("nav.html", () => {
                 const currentUser = SDK.User.current();
@@ -219,6 +224,7 @@ const SDK = {
     },
 
     //These methods is used for localstorage. To store things that are used later.
+    // Reference: line 2257- 245 this code is taken from DISbook exerciseteacher Jesper.
     Storage: {
         prefix: "CafeNexusSDK",
         persist: (key, value) => {

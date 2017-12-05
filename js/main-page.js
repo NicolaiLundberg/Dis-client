@@ -2,18 +2,19 @@ $(document).ready(() => {
 
     //This is the code which is fired when the login button is pressed on.
     $("#login-button").click(() => {
+
         //making constants of the inuts from the user to login.
         const email = $("#inputEmail").val();
         const password = $("#inputPassword").val();
 
         //The logincall to the server which gives the serve the input from the users. If the user is authorized he/she will reach the homepage.
-        SDK.User.login(password, email, (err, data) => {
+        SDK.User.login(password, email, (err) => {
             debugger;
             if (err && err.xhr.status === 401) {
                 window.alert("Forkert brugernavn eller kode");
             }
             else if (err) {
-                console.log("Oups!")
+                console.log("Oups, something went wrong");
             }
             else {
                 window.location.href = "home-page.html";

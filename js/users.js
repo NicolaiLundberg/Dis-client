@@ -8,6 +8,9 @@ $(document).ready(() => {
 
     //This is the server call to get alle users in the database.
     SDK.User.findAll((err, users) => {
+
+        // This is a foreach loop which will get all the users and put their information into the userlist.
+        // Reference: line 14 - 36 this code is created with inspiration from DISbook project handed out by the exerciseteacher Jesper.
         users.forEach((user) => {
 
             $userlist.append(`
@@ -25,10 +28,11 @@ $(document).ready(() => {
                 <td>${user.description}</td>
             </tr>
             </table>
-            <div id="load-test"></div>
+           
             </div>
                 `
             );
         });
     });
+    //<div id="load-test"></div>
 });

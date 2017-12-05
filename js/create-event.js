@@ -20,7 +20,7 @@ $(document).ready(() => {
                 window.alert("Fejl! tjek indtastede værdier");
             }
             else if (err) {
-                console.log("Oups");
+                console.log("Oups, something went wrong");
             }
             else {
                 window.location.href = "events.html";

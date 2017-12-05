@@ -10,8 +10,10 @@ $(document).ready(() => {
     SDK.Event.findAllEvents((err, events) => {
 
         //Making a foreach loop to get all the events into the events.html page.
-        //Every events will get the same look because they are all inserted into eventHtml constant.
+        //Every events will get the same look because they are all inserted into eventHtml.
+        //Reference: some of the code below is inspiration from DISbook handed out by the exerciseteacher Jesper.
         events.forEach((event) => {
+
             const eventHtml = `
         <div class="col-lg-4 book-container">
             <div class="panel panel-default">
@@ -37,15 +39,16 @@ $(document).ready(() => {
                 
                 <div class="panel-footer">
                     <div class="row">
-                            <button class="btn btn-default this-button" data-event-id="${event.id}">Flere detaljer</button>
+                            <button class="btn btn-default this-button" data-event-id="${event.id}">Opslag</button>
                     </div>
                 </div>
             </div>
             
         </div>`;
+
+            //the eventHtml is appended into the eventList which will be put into the events.html.
             $eventList.append(eventHtml);
         });
-
 
         //This is the code which is fired when the "flere detaljer" button is fired.
         $(".this-button").click(function () {
