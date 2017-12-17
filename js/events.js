@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     //Loading the navigationbar.
-    SDK.User.loadNav();
+   // SDK.User.loadNav();
     //creating constant of the event list in the events.html page.
     const $eventList = $("#event-list");
 
@@ -11,7 +11,7 @@ $(document).ready(() => {
 
         //Making a foreach loop to get all the events into the events.html page.
         //Every events will get the same look because they are all inserted into eventHtml.
-        //Reference: some of the code below is inspiration from DISbook handed out by the exerciseteacher Jesper.
+        //Reference: some of the code below is created with inspiration from DISbook handed out by the exerciseteacher Jesper.
         events.forEach((event) => {
 
             const eventHtml = `

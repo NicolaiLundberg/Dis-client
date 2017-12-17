@@ -16,7 +16,7 @@ $(document).ready(() => {
         // The create user call to the server which sends the input from the new user to the server. If the user is created then the new user is stored in the database
         //and he/she will be able to login to the system.
         SDK.User.createUser(password, firstName, lastName, email, description, gender, major, semester, (err) => {
-            if (err && err.xhr.status === 500) {
+            if (err && err.xhr.status === 400) {
                 window.alert("Fejl! tjek indtastede værdier");
             }
             else if (err) {

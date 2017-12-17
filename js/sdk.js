@@ -3,7 +3,7 @@ const SDK = {
 
     //initializing the serverURL to connect with the server.
     //Reference: line 6 - 31, this code is taken from DISbook project handed out by the exerciseteacher Jesper.
-    serverURL: "https://localhost:8443/api",
+    serverURL: "http://localhost:8080/api",
     request: (options, cb) => {
 
         let headers = {};
@@ -198,7 +198,7 @@ const SDK = {
             }, (err, data) => {
                 if (err) return cb(err);
 
-                // Reference: line 199 - 203 https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
+                // Reference: line 202 - 209 https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
                 let token = data;
 
                 var base64Url = token.split('.')[0];

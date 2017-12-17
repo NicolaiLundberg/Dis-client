@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     //loading the navigationbar.
-    SDK.User.loadNav();
+   // SDK.User.loadNav();
 
     // The code which is fired if the create event button is pressed on.
     $("#createEvent-button").click(() => {

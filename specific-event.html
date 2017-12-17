@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>specificevent</title>
 
+    <!-- Creating links to the stylesheets (The main css is not used)-->
     <link rel="stylesheet" href="lib/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
 
+    <meta charset="UTF-8">
+    <title>specificEvent</title>
 </head>
+
+<!-- This is the body where the main html code is -->
 <body>
 
 <div class="container">
@@ -18,27 +21,23 @@
         <h1 align="CENTER"></h1>
     </div>
 
+    <div class="row" id="specificEvent-list"></div>
+    <div class="row" id="post-list"></div>
 
-        <div class="row" id="specificEvent-list"></div>
-        <div class="row" id="post-list">
+    <div class="row">
+        <div class="col-lg-4">
 
+            <label class="control-label" for="inputNewPost">Nyt opslag:</label>
 
-        </div>
+            <textarea rows="4" cols="50" id="inputNewPost"></textarea>
 
-        <div class="row">
-
-            <div class="col-lg-4">
-
-                <label class="control-label" for="inputNewPost">Nyt opslag:</label>
-
-                <textarea rows="4" cols="50" id="inputNewPost"></textarea>
-
-                <button style="..." class="btn btn-default" id="newPost-button">Opret nyt opslag</button>
-                <button style="..." class="btn btn-default" id="return-button">Tilbage</button>
+            <button style="..." class="btn btn-default" id="newPost-button">Opret nyt opslag</button>
+            <button style="..." class="btn btn-default" id="return-button">Tilbage</button>
 
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog " role="document">
@@ -71,22 +70,24 @@
     </div>
 </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted" align="CENTER">2017 © All rights reserved - Team ROFL/Cafe Nexus.</p>
-        </div>
-    </footer>
-
-
-    <script src="lib/js/jquery-3.2.1.js"></script>
-    <script src="lib/js/bootstrap.js"></script>
-    <script src="js/sdk.js"></script>
-    <script src="js/specific-event.js"></script>
-    <script>
-        SDK.User.loadNav();
-    </script>
-
 </body>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" align="CENTER">2017 © All rights reserved - Team ROFL/Cafe Nexus.</p>
+    </div>
+</footer>
+
+<!-- Creating links to the relevant javascript files-->
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/specific-event.js"></script>
+<script>
+    SDK.User.loadNav();
+</script>
+
+
 
 
 </html>

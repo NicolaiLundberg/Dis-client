@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     //Loading the navigationbar.
-    SDK.User.loadNav();
+    //SDK.User.loadNav();
 
     //Creating a constant for the userlist in the users.html page.
     const $userlist = $("#user-list");

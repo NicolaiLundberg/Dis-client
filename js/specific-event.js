@@ -107,6 +107,7 @@ $(document).ready(() => {
                     $modalTbody.append(`
                  <dl>
                       <dt>${user}</dt>
+                      <dt>${post.created}</dt>
                       <dd>${post.content}</dd>     
                  </dl>
                  `);
